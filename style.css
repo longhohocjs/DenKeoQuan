@@ -1,0 +1,74 @@
+ /* Định nghĩa kích thước và các biến cho khối 3D */
+ :root {
+    --cube-size: 200px; /* Kích thước cạnh của khối lập phương */
+    --perspective-distance: 800px; /* Khoảng cách phối cảnh */
+}
+
+/* Định nghĩa không gian 3D */
+.scene {
+    perspective: var(--perspective-distance);
+    width: var(--cube-size);
+    height: var(--cube-size);
+    margin: 5rem auto; /* Căn giữa cho màn hình lớn */
+}
+
+/* Định nghĩa khối lập phương */
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d; /* Rất quan trọng để duy trì hiệu ứng 3D */
+}
+
+/* Keyframes cho hiệu ứng quay liên tục */
+@keyframes spin-cube {
+    from { transform: rotateY(0deg) rotateX(0deg); }
+    to { transform: rotateY(360deg) rotateX(360deg); }
+}
+
+/* Áp dụng hiệu ứng quay khi có class 'is-spinning' */
+.is-spinning {
+    animation: spin-cube 30s linear infinite;
+}
+
+/* CSS cho các mặt của khối lập phương */
+.face {
+    position: absolute;
+    width: var(--cube-size);
+    height: var(--cube-size);
+    border: 2px solid #ffffff60;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-out; /* Thêm transition cho hiệu ứng dừng/quay mượt mà */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 8px; /* Bo tròn góc */
+    overflow: hidden;
+}
+
+.face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo hình ảnh vừa vặn */
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+/* Đặt các mặt vào vị trí 3D */
+/* Mặt trước */
+.front  { transform: rotateY(0deg) translateZ(calc(var(--cube-size) / 2)); }
+/* Mặt sau */
+.back   { transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2)); }
+/* Mặt phải */
+.right  { transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2)); }
+/* Mặt trái */
+.left   { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+/* Mặt trên */
+.top    { transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2)); }
+/* Mặt dưới */
+.bottom { transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2)); }
