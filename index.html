@@ -8,44 +8,44 @@
     <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 min-h-screen text-white font-sans flex flex-col items-center p-4">
+<body class="bg-gray-900 min-h-screen text-white flex flex-col items-center p-4">
 
     <header class="text-center mb-8">
-        <h1 class="text-4xl font-extrabold mb-2 text-yellow-400">Đèn Kéo Quân 3D</h1>
-        <p class="text-gray-400 text-lg">Mô phỏng 3D Lantern với hiệu ứng quay và tương tác chuột.</p>
-        <p class="mt-4 text-sm text-yellow-300">
-            * <span id="status-text">Đang quay...</span>
+        <h1 class="text-5xl font-extrabold mb-3 text-yellow-400">🏮 Đèn Kéo Quân 3D</h1>
+        <p class="text-gray-300 text-xl">Hiệu ứng quay và tương tác chuột</p>
+        <p class="mt-6 text-base font-medium">
+            Trạng thái: <span id="status-text" class="text-green-400">* Đang quay...</span>
         </p>
     </header>
 
     <!-- Khung cảnh 3D -->
     <div id="scene" class="scene">
-        <!-- Khối lập phương quay -->
+        <!-- Khối lập phương quay. Giữ nguyên class is-spinning -->
         <div id="cube" class="cube is-spinning rounded-xl">
-            <!-- 6 Mặt của đèn -->
-            <div class="face front bg-red-600/50">
-                <img src="https://placehold.co/200x200/FF5733/FFFFFF?text=Mặt+1" alt="Mặt 1" onerror="this.style.opacity='1'; this.style.backgroundColor='#FF5733';" />
+            <!-- 6 Mặt của đèn (Sử dụng placeholder URL) -->
+            <div class="face front">
+                <img src="https://media.istockphoto.com/id/1177725791/photo/face-of-a-cat.webp?a=1&s=612x612&w=0&k=20&c=7x-O4SqX8cpMR57WCBf-orl6aIJCAEabgNhHhrGsK7A=" alt="Mặt 1" onerror="this.src='https://placehold.co/240x240/FF5733/FFFFFF?text=LỄ+HỘI';" />
             </div>
-            <div class="face back bg-blue-600/50">
-                <img src="https://placehold.co/200x200/33A2FF/FFFFFF?text=Mặt+2" alt="Mặt 2" onerror="this.style.opacity='1'; this.style.backgroundColor='#33A2FF';" />
+            <div class="face back">
+                <img src="https://media.istockphoto.com/id/1211009582/photo/close-up-surprised-siamese-cat-on-green-isolated-plain-background.webp?a=1&s=612x612&w=0&k=20&c=ZiP-yU_5MPKD82A7S6W-ffj2mbpYo7J9t0ECm8H1ijo=" alt="Mặt 2" onerror="this.src='https://placehold.co/240x240/33A2FF/FFFFFF?text=TRUNG+THU';" />
             </div>
-            <div class="face right bg-green-600/50">
-                <img src="https://placehold.co/200x200/33FF57/FFFFFF?text=Mặt+3" alt="Mặt 3" onerror="this.style.opacity='1'; this.style.backgroundColor='#33FF57';" />
+            <div class="face right">
+                <img src="https://media.istockphoto.com/id/1445253259/photo/goliath.webp?a=1&s=612x612&w=0&k=20&c=PGuDChko5HiqcVn5R0BnMo4glYc6tF09JAcIlMqtxEE=" alt="Mặt 3" onerror="this.src='https://placehold.co/240x240/33FF57/000000?text=HOA+ĐĂNG';" />
             </div>
-            <div class="face left bg-yellow-600/50">
-                <img src="https://placehold.co/200x200/FFD133/000000?text=Mặt+4" alt="Mặt 4" onerror="this.style.opacity='1'; this.style.backgroundColor='#FFD133';" />
+            <div class="face left">
+                <img src="https://media.istockphoto.com/id/480742437/photo/beautiful-black-and-white-cat-on-a-light-background.webp?a=1&s=612x612&w=0&k=20&c=tlJImmKBUzPhP8mYERidaj16Yh9J2pgxZIrhEgPG3DU=" alt="Mặt 4" onerror="this.src='https://placehold.co/240x240/FFD133/000000?text=TRUYỀN+THỐNG';" />
             </div>
-            <div class="face top bg-purple-600/50">
-                <img src="https://placehold.co/200x200/A233FF/FFFFFF?text=Mặt+5" alt="Mặt 5" onerror="this.style.opacity='1'; this.style.backgroundColor='#A233FF';" />
+            <div class="face top">
+                <img src="https://media.istockphoto.com/id/1028698130/photo/cats.webp?a=1&s=612x612&w=0&k=20&c=EynfIKf4SBGfji7JPdgPFgOtzrEnkCbNYWcjoil_P4I=" alt="Mặt 5" onerror="this.src='https://placehold.co/240x240/A233FF/FFFFFF?text=MẶT+5';" />
             </div>
-            <div class="face bottom bg-pink-600/50">
-                <img src="https://placehold.co/200x200/FF33A2/FFFFFF?text=Mặt+6" alt="Mặt 6" onerror="this.style.opacity='1'; this.style.backgroundColor='#FF33A2';" />
+            <div class="face bottom">
+                <img src="https://media.istockphoto.com/id/1220350980/vi/anh/m%E1%BB%99t-con-m%C3%A8o-ng%E1%BB%93i-y%C3%AAn-b%C3%ACnh.jpg?s=612x612&w=0&k=20&c=KmA669m-Oa_AJ2gcobzzMd4mf0sz4tR-hJ5fHSxKlJU=" alt="Mặt 6" onerror="this.src='https://placehold.co/240x240/FF33A2/FFFFFF?text=MẶT+6';" />
             </div>
         </div>
     </div>
 
-    <p class="text-gray-500 mt-8 text-center max-w-lg">
-        <strong class="text-white">Hướng dẫn:</strong> Di chuyển chuột (hoặc chạm trên thiết bị di động) vào bất kỳ mặt nào của khối đèn để làm đèn dừng quay. Rê chuột ra ngoài để đèn tiếp tục quay.
+    <p class="text-gray-400 mt-12 text-center max-w-lg p-4 bg-gray-800/50 rounded-lg shadow-xl border border-yellow-500/30">
+        <strong class="text-yellow-300">Tương tác:</strong> Di chuyển chuột (hoặc chạm trên di động) vào <span class="text-red-400">TỪNG MẶT RIÊNG BIỆT</span> của Đèn để dừng quay. Rê chuột ra ngoài để Đèn tiếp tục quay.
     </p>
 
     <script src="./script.js"></script>

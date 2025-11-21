@@ -1,74 +1,114 @@
- /* Định nghĩa kích thước và các biến cho khối 3D */
- :root {
-    --cube-size: 200px; /* Kích thước cạnh của khối lập phương */
-    --perspective-distance: 800px; /* Khoảng cách phối cảnh */
-}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đèn Kéo Quân 3D - Rotating Lantern</title>
+    <!-- Tải Tailwind CSS và đặt Font Inter -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* ==================================== */
+        /* BẮT ĐẦU PHẦN CSS (TƯƠNG ĐƯƠNG style.css) */
+        /* ==================================== */
+        
+        /* Cấu hình chung cho font Inter */
+        html { font-family: 'Inter', sans-serif; }
 
-/* Định nghĩa không gian 3D */
-.scene {
-    perspective: var(--perspective-distance);
-    width: var(--cube-size);
-    height: var(--cube-size);
-    margin: 5rem auto; /* Căn giữa cho màn hình lớn */
-}
+        /* Định nghĩa kích thước và các biến cho khối 3D */
+        :root {
+            --cube-size: 240px; /* Tăng kích thước đèn */
+            --perspective-distance: 1000px;
+        }
 
-/* Định nghĩa khối lập phương */
-.cube {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d; /* Rất quan trọng để duy trì hiệu ứng 3D */
-}
+        /* Định nghĩa không gian 3D */
+        .scene {
+            perspective: var(--perspective-distance);
+            width: var(--cube-size);
+            height: var(--cube-size);
+            margin: 4rem auto;
+        }
 
-/* Keyframes cho hiệu ứng quay liên tục */
-@keyframes spin-cube {
-    from { transform: rotateY(0deg) rotateX(0deg); }
-    to { transform: rotateY(360deg) rotateX(360deg); }
-}
+        /* Định nghĩa khối lập phương */
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 0 0 50px rgba(255, 255, 0, 0.4); /* Thêm hiệu ứng phát sáng nhẹ */
+        }
 
-/* Áp dụng hiệu ứng quay khi có class 'is-spinning' */
-.is-spinning {
-    animation: spin-cube 30s linear infinite;
-}
+        /* Keyframes cho hiệu ứng quay liên tục chỉ quay quanh trục Y */
+        @keyframes spin-y-axis {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
 
-/* CSS cho các mặt của khối lập phương */
-.face {
-    position: absolute;
-    width: var(--cube-size);
-    height: var(--cube-size);
-    border: 2px solid #ffffff60;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease-out; /* Thêm transition cho hiệu ứng dừng/quay mượt mà */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border-radius: 8px; /* Bo tròn góc */
-    overflow: hidden;
-}
+        /* Áp dụng hiệu ứng quay */
+        .is-spinning {
+            animation: spin-y-axis 20s linear infinite; /* Tăng tốc độ quay nhẹ */
+        }
 
-.face img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Đảm bảo hình ảnh vừa vặn */
-    opacity: 0.8;
-    transition: opacity 0.3s;
-}
+        /* CSS cho các mặt của khối lập phương */
+        .face {
+            position: absolute;
+            width: var(--cube-size);
+            height: var(--cube-size);
+            border: 4px solid #ffffffa0; /* Viền rõ hơn */
+            background-color: rgba(255, 255, 255, 0.15); /* Nền mờ hơn */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease-in-out; 
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            border-radius: 12px; /* Bo tròn góc nhiều hơn */
+            overflow: hidden;
+            backface-visibility: hidden; /* Cải thiện hiển thị 3D */
+        }
+        
+        /* Hiệu ứng khi hover vào mặt đèn (chỉ áp dụng box-shadow) */
+        .face:hover {
+            box-shadow: 0 0 30px #fcd34d, 0 0 50px #fef3c7; 
+        }
 
-/* Đặt các mặt vào vị trí 3D */
-/* Mặt trước */
-.front  { transform: rotateY(0deg) translateZ(calc(var(--cube-size) / 2)); }
-/* Mặt sau */
-.back   { transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2)); }
-/* Mặt phải */
-.right  { transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2)); }
-/* Mặt trái */
-.left   { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2)); }
-/* Mặt trên */
-.top    { transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2)); }
-/* Mặt dưới */
-.bottom { transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+        .face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            /* Thêm transition cho transform để phóng to ảnh mượt mà */
+            transition: opacity 0.3s, transform 0.5s ease;
+            transform: scale(1); /* Trạng thái ban đầu */
+        }
+        
+        /* Áp dụng hiệu ứng scale trực tiếp lên ảnh bên trong khi hover */
+        .face:hover img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+
+        /* Đặt các mặt vào vị trí 3D */
+        .front  { transform: rotateY(0deg) translateZ(calc(var(--cube-size) / 2)); }
+        .back   { transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2)); }
+        .right  { transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2)); }
+        .left   { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+        .top    { transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2)); }
+        .bottom { transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+
+        /* Đảm bảo responsive tốt trên di động */
+        @media (max-width: 640px) {
+            :root {
+                --cube-size: 180px;
+                --perspective-distance: 600px;
+            }
+            .scene {
+                margin: 3rem auto;
+            }
+        }
+        /* ==================================== */
+        /* KẾT THÚC PHẦN CSS */
+        /* ==================================== */
